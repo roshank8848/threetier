@@ -31,8 +31,8 @@ services:
 
   frontend:
     image: prengineering/frontend:latest
-    expose:
-      - "80"
+    ports:
+      - "80:80"
     depends_on:
       - backend
 volumes:
