@@ -39,9 +39,12 @@ pipeline {
                       sh '''
                          echo "copying dokcer-compose file to deploymenet server"
                          scp -i "$SSH_KEY" -o StrictHostKeyChecking=no docker-compose.yaml ubuntu@"${APP_SERVER}":~/docker-compose.yaml
-                         docker compose down
-                         sleep 10 
-                         docker compose up -d
+                         ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no ubuntu@"${APP_SERVER}" "
+                            docker compose down
+                            sleep 10 
+                            docker compose up -d
+                          "
+                      '''
                     }
                   }
             }
